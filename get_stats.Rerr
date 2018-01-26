@@ -1,0 +1,243 @@
+Loading required package: Matrix
+Loading required package: methods
+
+Attaching package: ‘dplyr’
+
+The following object is masked from ‘package:MASS’:
+
+    select
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘tidyr’
+
+The following object is masked from ‘package:Matrix’:
+
+    expand
+
+Loading required package: lmer.slimr
+Full model converged!
+Full model converged!
+refitting model(s) with ML (instead of REML)
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_me[["refix"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["refix"]]))	 if you need it
+
+Full model converged!
+Full model converged!
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_no_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_no_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(...., correlation=TRUE)  or
+	 vcov(....)	 if you need it
+
+Full model converged!
+Full model did not converge. Had to change formula by 3 steps.
+refitting model(s) with ML (instead of REML)
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_me[["refix"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["refix"]]))	 if you need it
+
+Full model did not converge. Had to change formula by 2 steps.
+Full model converged!
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_no_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_no_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(...., correlation=TRUE)  or
+	 vcov(....)	 if you need it
+
+Full model converged!
+Full model did not converge. Had to change formula by 5 steps.
+refitting model(s) with ML (instead of REML)
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_me[["refix"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["refix"]]))	 if you need it
+
+Full model converged!
+Full model converged!
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_no_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_no_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(...., correlation=TRUE)  or
+	 vcov(....)	 if you need it
+
+Full model did not converge. Had to change formula by 1 steps.
+Full model converged!
+refitting model(s) with ML (instead of REML)
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_me[["refix"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["refix"]]))	 if you need it
+
+Full model did not converge. Had to change formula by 2 steps.
+Full model converged!
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_no_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_no_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(...., correlation=TRUE)  or
+	 vcov(....)	 if you need it
+
+Full model did not converge. Had to change formula by 1 steps.
+Full model did not converge. Had to change formula by 7 steps.
+refitting model(s) with ML (instead of REML)
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_me[["refix"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["refix"]]))	 if you need it
+
+Full model did not converge. Had to change formula by 1 steps.
+Full model converged!
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_no_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_no_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(...., correlation=TRUE)  or
+	 vcov(....)	 if you need it
+
+Full model converged!
+Full model converged!
+refitting model(s) with ML (instead of REML)
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_me[["refix"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["refix"]]))	 if you need it
+
+Full model converged!
+Full model converged!
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_no_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_no_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(...., correlation=TRUE)  or
+	 vcov(....)	 if you need it
+
+Full model converged!
+Simplest model failed to converge, and return.only.converged==T.
+refitting model(s) with ML (instead of REML)
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["gzd"]]))	 if you need it
+
+Full model converged!
+Full model converged!
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(summary(models_no_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_no_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 16 > 12.
+Use print(...., correlation=TRUE)  or
+	 vcov(....)	 if you need it
+
+Full model did not converge. Had to change formula by 2 steps.
+Full model converged!
+refitting model(s) with ML (instead of REML)
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_me[["refix"]]), correlation=TRUE)  or
+	 vcov(summary(models_me[["refix"]]))	 if you need it
+
+Full model converged!
+Full model converged!
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(summary(models_no_me[["gzd"]]), correlation=TRUE)  or
+	 vcov(summary(models_no_me[["gzd"]]))	 if you need it
+
+
+Correlation matrix not shown by default, as p = 13 > 12.
+Use print(...., correlation=TRUE)  or
+	 vcov(....)	 if you need it
+
+Warning message:
+In mclapply(models_me, function(m) { :
+  scheduled cores 2 encountered errors in user code, all values of the jobs will be affected
+Full model converged!
+Full model did not converge. Had to change formula by 3 steps.
+refitting model(s) with ML (instead of REML)
+Full model converged!
+Full model converged!
+Full model converged!
+Full model converged!
+refitting model(s) with ML (instead of REML)
+Full model converged!
+Full model converged!
+Full model converged!
+Full model did not converge. Had to change formula by 1 steps.
+refitting model(s) with ML (instead of REML)
+Full model converged!
+Full model converged!
+Full model converged!
+Full model converged!
+refitting model(s) with ML (instead of REML)
+Full model converged!
+Full model converged!

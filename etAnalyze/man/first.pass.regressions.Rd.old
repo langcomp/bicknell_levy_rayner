@@ -1,0 +1,90 @@
+\name{first.pass.regressions}
+\Rdversion{1.1}
+\alias{first.pass.regressions}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+%%  ~~function to do ... ~~
+}
+\description{
+%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+}
+\usage{
+first.pass.regressions(expt)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{expt}{
+%%     ~~Describe \code{expt} here~~
+}
+}
+\details{
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
+}
+\references{
+%% ~put references to the literature/web site here ~
+}
+\author{
+%%  ~~who you are~~
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+%% ~~objects to See Also as \code{\link{help}}, ~~~
+}
+\examples{
+##---- Should be DIRECTLY executable !! ----
+##-- ==>  Define data, use random,
+##--	or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function (expt) 
+{
+    regions <- 1:dim(expt@delim)[3]
+    subj <- numeric(0)
+    item <- numeric(0)
+    cond <- numeric(0)
+    reg <- numeric(0)
+    ord <- numeric(0)
+    fpr <- c()
+    for (i in 1:length(expt@trials)) {
+        t <- expt@trials[[i]]
+        previous.region <- 0
+        this.trial.regressions <- rep(FALSE, length(regions))
+        first.pass.completed <- rep(FALSE, length(regions))
+        current.first.pass.region <- 0
+        for (j in 1:length(t@x)) {
+            if (t@region[j] < previous.region && !first.pass.completed[previous.region]) 
+                this.trial.regressions[previous.region] <- TRUE
+            if (t@region[j] != previous.region) 
+                for (z in 1:previous.region) first.pass.completed[z] <- TRUE
+            previous.region <- t@region[j]
+        }
+        for (j in 1:length(this.trial.regressions)) {
+            subj <- c(subj, t@subj)
+            item <- c(item, t@item)
+            cond <- c(cond, t@condition)
+            ord <- c(ord, t@order)
+            reg <- c(reg, j)
+            fpr <- c(fpr, this.trial.regressions[j])
+        }
+    }
+    result <- data.frame(subj = subj, item = item, order = ord, 
+        cond = cond, region = reg, fpr = fpr)
+    return(result[do.call(order, result), ])
+  }
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ ~kwd1 }
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

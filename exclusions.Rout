@@ -1,0 +1,108 @@
+Yos timing exclusions
+
+Here's the jhook data after exclusions. Please inspect!
+
+    subject          item      condition   comment        nochange
+ 34     : 153   11     :  41   1:2757    blink :   0   Min.   :0  
+ 46     : 135   23     :  41   2:2691    blink2:   0   1st Qu.:0  
+ 21     : 132   72     :  41             good  : 705   Median :0  
+ 31     : 131   102    :  41             infix :4743   Mean   :0  
+ 5      : 128   130    :  41             jhook :   0   3rd Qu.:0  
+ 14     : 127   36     :  40                           Max.   :0  
+ (Other):4642   (Other):5203                                      
+     timing            postX            postfix         postpupil   
+ Min.   :-37.000   Min.   :-537.10   Min.   :  20.0   Min.   : 228  
+ 1st Qu.:  2.000   1st Qu.: -50.20   1st Qu.: 180.0   1st Qu.:1003  
+ Median :  6.000   Median : -38.80   Median : 220.0   Median :1245  
+ Mean   :  4.894   Mean   : -38.72   Mean   : 241.9   Mean   :1260  
+ 3rd Qu.:  9.000   3rd Qu.: -23.80   3rd Qu.: 275.0   3rd Qu.:1470  
+ Max.   : 12.000   Max.   :  -0.10   Max.   :1146.0   Max.   :2761  
+                                                                    
+      preX            prefix          prepupil     startChange      
+ Min.   :  1.10   Min.   :  23.0   Min.   : 248   Min.   :   75162  
+ 1st Qu.: 13.70   1st Qu.: 166.0   1st Qu.:1001   1st Qu.: 1128360  
+ Median : 22.40   Median : 209.0   Median :1259   Median : 1697074  
+ Mean   : 31.27   Mean   : 228.8   Mean   :1269   Mean   : 2062464  
+ 3rd Qu.: 38.70   3rd Qu.: 267.0   3rd Qu.:1481   3rd Qu.: 2478022  
+ Max.   :191.10   Max.   :3443.0   Max.   :2753   Max.   :10292268  
+                                                                    
+ completeChange     absoluteXAtDisplayChange
+ Min.   :   75181   Min.   :334.9           
+ 1st Qu.: 1128376   1st Qu.:381.8           
+ Median : 1697092   Median :387.9           
+ Mean   : 2062480   Mean   :391.4           
+ 3rd Qu.: 2478035   3rd Qu.:397.0           
+ Max.   :10292285   Max.   :468.2           
+                                            
+YD timing exclusions
+
+Here's the jhook data after exclusions. Please inspect!
+
+    subject          item      condition   comment        nochange
+ 2      : 148   26     :  43   1:1425          :   0   Min.   :0  
+ 26     : 148   37     :  42   2:1414    blink :   0   1st Qu.:0  
+ 49     : 146   51     :  42   3:1456    blink2:   0   Median :0  
+ 39     : 143   86     :  42   4:1456    good  :1837   Mean   :0  
+ 19     : 140   28     :  41             infix :3914   3rd Qu.:0  
+ 12     : 139   50     :  41             jhook :   0   Max.   :0  
+ (Other):4887   (Other):5500                                      
+     timing            postX            postfix         postpupil   
+ Min.   :-34.000   Min.   :-296.60   Min.   :  26.0   Min.   : 568  
+ 1st Qu.: -4.000   1st Qu.: -47.40   1st Qu.: 185.0   1st Qu.:1139  
+ Median :  4.000   Median : -35.50   Median : 229.0   Median :1348  
+ Mean   :  1.435   Mean   : -35.04   Mean   : 249.1   Mean   :1343  
+ 3rd Qu.:  8.000   3rd Qu.: -21.00   3rd Qu.: 288.0   3rd Qu.:1533  
+ Max.   : 12.000   Max.   :  -0.10   Max.   :1061.0   Max.   :3141  
+                                                                    
+      preX            prefix          prepupil     startChange     
+ Min.   :  0.80   Min.   :  21.0   Min.   : 565   Min.   : 214299  
+ 1st Qu.: 13.90   1st Qu.: 170.0   1st Qu.:1148   1st Qu.:1076317  
+ Median : 23.10   Median : 214.0   Median :1353   Median :1600437  
+ Mean   : 32.44   Mean   : 234.2   Mean   :1350   Mean   :2066881  
+ 3rd Qu.: 39.05   3rd Qu.: 272.0   3rd Qu.:1543   3rd Qu.:2486558  
+ Max.   :206.50   Max.   :1524.0   Max.   :2988   Max.   :9334847  
+                                                                   
+ completeChange    absoluteXAtDisplayChange
+ Min.   : 214312   Min.   :367.6           
+ 1st Qu.:1076317   1st Qu.:414.8           
+ Median :1600455   Median :421.1           
+ Mean   :2066893   Mean   :424.6           
+ 3rd Qu.:2486574   3rd Qu.:430.5           
+ Max.   :9334863   Max.   :512.2           
+                                           
+YDR timing exclusions
+
+Here's the jhook data after exclusions. Please inspect!
+
+    subject          item      condition   comment        nochange
+ 25     : 154   15     :  53   1:1814          :   0   Min.   :0  
+ 26     : 154   80     :  53   2:1827    blink :   0   1st Qu.:0  
+ 22     : 152   5      :  51   3:1859    blink2:   0   Median :0  
+ 23     : 152   75     :  51   4:1817    good  :6706   Mean   :0  
+ 30     : 152   95     :  51             infix : 611   3rd Qu.:0  
+ 13     : 151   4      :  50             jhook :   0   Max.   :0  
+ (Other):6402   (Other):7008                                      
+     timing            postX            postfix         postpupil   
+ Min.   :-38.000   Min.   :-261.20   Min.   :  21.0   Min.   : 652  
+ 1st Qu.:-13.000   1st Qu.: -46.20   1st Qu.: 178.0   1st Qu.:1118  
+ Median : -9.000   Median : -32.60   Median : 220.0   Median :1309  
+ Mean   : -8.832   Mean   : -32.85   Mean   : 238.8   Mean   :1354  
+ 3rd Qu.: -5.000   3rd Qu.: -14.30   3rd Qu.: 280.0   3rd Qu.:1545  
+ Max.   : 12.000   Max.   :  -0.10   Max.   :1309.0   Max.   :2755  
+                                                                    
+      preX            prefix          prepupil     startChange     
+ Min.   :  1.20   Min.   :  24.0   Min.   : 439   Min.   : 288554  
+ 1st Qu.: 15.70   1st Qu.: 167.0   1st Qu.:1131   1st Qu.:1086830  
+ Median : 27.60   Median : 208.0   Median :1320   Median :1506807  
+ Mean   : 40.01   Mean   : 227.1   Mean   :1366   Mean   :1668710  
+ 3rd Qu.: 59.50   3rd Qu.: 265.0   3rd Qu.:1557   3rd Qu.:1915538  
+ Max.   :218.10   Max.   :1885.0   Max.   :2774   Max.   :7430153  
+                                                                   
+ completeChange    absoluteXAtDisplayChange
+ Min.   : 288554   Min.   :365.9           
+ 1st Qu.:1086830   1st Qu.:413.6           
+ Median :1506807   Median :419.8           
+ Mean   :1668710   Mean   :423.4           
+ 3rd Qu.:1915538   3rd Qu.:429.3           
+ Max.   :7430153   Max.   :502.8           
+                                           

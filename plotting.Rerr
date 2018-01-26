@@ -1,0 +1,30 @@
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+
+Attaching package: ‘Hmisc’
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:Hmisc’:
+
+    combine, src, summarize
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: ggintervals
+Warning message:
+Removed 70 rows containing non-finite values (stat_summary). 
+Warning message:
+Removed 70 rows containing non-finite values (stat_summary). 

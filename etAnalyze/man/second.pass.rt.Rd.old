@@ -1,0 +1,99 @@
+\name{second.pass.rt}
+\Rdversion{1.1}
+\alias{second.pass.rt}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+%%  ~~function to do ... ~~
+}
+\description{
+%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+}
+\usage{
+second.pass.rt(expt, skip.counts.as.first.pass = TRUE)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{expt}{
+%%     ~~Describe \code{expt} here~~
+}
+  \item{skip.counts.as.first.pass}{
+%%     ~~Describe \code{skip.counts.as.first.pass} here~~
+}
+}
+\details{
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
+}
+\references{
+%% ~put references to the literature/web site here ~
+}
+\author{
+%%  ~~who you are~~
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+%% ~~objects to See Also as \code{\link{help}}, ~~~
+}
+\examples{
+##---- Should be DIRECTLY executable !! ----
+##-- ==>  Define data, use random,
+##--	or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function (expt, skip.counts.as.first.pass = TRUE) 
+{
+    regions <- 1:dim(expt@delim)[3]
+    subj <- numeric(0)
+    item <- numeric(0)
+    cond <- numeric(0)
+    reg <- numeric(0)
+    ord <- numeric(0)
+    second.pass <- c()
+    for (i in 1:length(expt@trials)) {
+        t <- expt@trials[[i]]
+        previous.region <- 0
+        this.trial.rt <- rep(0, length(regions))
+        first.pass.completed <- rep(FALSE, length(regions))
+        for (j in 1:length(t@x)) {
+            if (t@region[j] < 1) {
+                print("error: trial with region 0: ")
+                print(t)
+            }
+            if (t@region[j] != previous.region) 
+                first.pass.completed[previous.region] <- TRUE
+            if (skip.counts.as.first.pass) 
+                first.pass.completed[1:(t@region[j] - 1)] <- TRUE
+            if (first.pass.completed[t@region[j]]) 
+                this.trial.rt[t@region[j]] <- this.trial.rt[t@region[j]] + 
+                  t@endTime[j] - t@startTime[j]
+            previous.region <- t@region[j]
+        }
+        for (j in 1:length(this.trial.rt)) {
+            subj <- c(subj, t@subj)
+            item <- c(item, t@item)
+            cond <- c(cond, t@condition)
+            ord <- c(ord, t@order)
+            reg <- c(reg, j)
+            second.pass <- c(second.pass, this.trial.rt[j])
+        }
+    }
+    result <- data.frame(subj = subj, item = item, order = ord, 
+        cond = cond, region = reg, second.pass = second.pass)
+    return(result[do.call(order, result), ])
+  }
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ ~kwd1 }
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

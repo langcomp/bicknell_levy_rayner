@@ -1,0 +1,105 @@
+\name{readTrialsFromFile}
+\Rdversion{1.1}
+\alias{readTrialsFromFile}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+%%  ~~function to do ... ~~
+}
+\description{
+%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+}
+\usage{
+readTrialsFromFile(filename, subj.number, delim, line.length, exclude.unknown.fixations = TRUE)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{filename}{
+%%     ~~Describe \code{filename} here~~
+}
+  \item{subj.number}{
+%%     ~~Describe \code{subj.number} here~~
+}
+  \item{delim}{
+%%     ~~Describe \code{delim} here~~
+}
+  \item{line.length}{
+%%     ~~Describe \code{line.length} here~~
+}
+  \item{exclude.unknown.fixations}{
+%%     ~~Describe \code{exclude.unknown.fixations} here~~
+}
+}
+\details{
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
+}
+\references{
+%% ~put references to the literature/web site here ~
+}
+\author{
+%%  ~~who you are~~
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+%% ~~objects to See Also as \code{\link{help}}, ~~~
+}
+\examples{
+##---- Should be DIRECTLY executable !! ----
+##-- ==>  Define data, use random,
+##--	or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function (filename, subj.number, delim, line.length, exclude.unknown.fixations = TRUE) 
+{
+    n <- length(readLines(filename))
+    result <- list()
+    for (i in 1:n) {
+        line <- scan(filename, skip = i - 1, nlines = 1, quiet = T)
+        order <- line[1]
+        cond <- line[2]
+        item <- line[3]
+        tot.time <- line[4]
+        nfix <- line[8]
+        fixs <- line[9:length(line)]
+        if (length(fixs)\%\%4 != 0) 
+            return(paste("error -- fixations vector wrong length on line!", 
+                i))
+        x <- fixs[(1:nfix) * 4 - 3]
+        y <- fixs[(1:nfix) * 4 - 2]
+        startTime <- fixs[(1:nfix) * 4 - 1]
+        endTime <- fixs[(1:nfix) * 4]
+        if (exclude.unknown.fixations) {
+            idx <- x >= 0 & y >= 0
+            x <- x[idx]
+            y <- y[idx]
+            startTime <- startTime[idx]
+            endTime <- endTime[idx]
+        }
+        this.delim <- delim[item, cond, 1:dim(delim)[3]]
+        this.region <- sapply(x + y * line.length, function(z) match(TRUE, 
+            z < c(this.delim, 1000)) - 1)
+        if (length(this.region) == 0) 
+            next
+        result <- append(result, new("trial", condition = cond, 
+            order = order, subj = subj.number, item = item, totalTime = tot.time, 
+            x = x, y = y, region = this.region, startTime = startTime, 
+            endTime = endTime))
+    }
+    return(result)
+  }
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ ~kwd1 }
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

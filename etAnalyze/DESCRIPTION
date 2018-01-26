@@ -1,0 +1,11 @@
+Package: etAnalyze
+Type: Package
+Title: Package for analyzing eye-movement data from reading experiments
+Version: 0.1
+Date: 2010-08-02
+Author: Roger Levy, Emily Morgan
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+LazyLoad: yes
+Depends: methods

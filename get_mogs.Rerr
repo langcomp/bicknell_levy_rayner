@@ -1,0 +1,41 @@
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: parallel
+mixtools package, version 1.0.4, Released 2016-01-11
+This package is based upon work supported by the National Science Foundation under Grant No. SES-0518772.
+
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+Loading required package: ggplot2
+
+Attaching package: ‘Hmisc’
+
+The following objects are masked from ‘package:plyr’:
+
+    is.discrete, summarize
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:Hmisc’:
+
+    combine, src, summarize
+
+The following objects are masked from ‘package:plyr’:
+
+    arrange, count, desc, failwith, id, mutate, rename, summarise,
+    summarize
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+

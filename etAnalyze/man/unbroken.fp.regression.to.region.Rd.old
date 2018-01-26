@@ -1,0 +1,131 @@
+\name{unbroken.fp.regression.to.region}
+\Rdversion{1.1}
+\alias{unbroken.fp.regression.to.region}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+%%  ~~function to do ... ~~
+}
+\description{
+%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+}
+\usage{
+unbroken.fp.regression.to.region(expt, fromRegion, toRegion, only.for.fp.regressions = FALSE, forward.within.region.ok = FALSE)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{expt}{
+%%     ~~Describe \code{expt} here~~
+}
+  \item{fromRegion}{
+%%     ~~Describe \code{fromRegion} here~~
+}
+  \item{toRegion}{
+%%     ~~Describe \code{toRegion} here~~
+}
+  \item{only.for.fp.regressions}{
+%%     ~~Describe \code{only.for.fp.regressions} here~~
+}
+  \item{forward.within.region.ok}{
+%%     ~~Describe \code{forward.within.region.ok} here~~
+}
+}
+\details{
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
+}
+\references{
+%% ~put references to the literature/web site here ~
+}
+\author{
+%%  ~~who you are~~
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+%% ~~objects to See Also as \code{\link{help}}, ~~~
+}
+\examples{
+##---- Should be DIRECTLY executable !! ----
+##-- ==>  Define data, use random,
+##--	or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function (expt, fromRegion, toRegion, only.for.fp.regressions = FALSE, 
+    forward.within.region.ok = FALSE) 
+{
+    if (toRegion >= fromRegion) 
+        warning(paste("error: fromRegion", fromRegion, " is not larger than toRegion", 
+            toRegion, "!"))
+    toRegion <- toRegion + 1
+    fromRegion <- fromRegion + 1
+    subj <- c()
+    item <- c()
+    cond <- c()
+    outcomes <- c()
+    for (i in 1:length(expt@trials)) {
+        t <- expt@trials[[i]]
+        leftEdgeFrom <- ifelse(fromRegion == 1, 0, expt@delim[t@item, 
+            t@condition, fromRegion - 1])
+        rightEdgeFrom <- ifelse(fromRegion == (dim(expt@delim)[3] + 
+            1), 999, expt@delim[t@item, t@condition, fromRegion])
+        leftEdgeTo <- ifelse(toRegion == 1, 0, expt@delim[t@item, 
+            t@condition, toRegion - 1])
+        rightEdgeTo <- ifelse(toRegion == (dim(expt@delim)[3] + 
+            1), 999, expt@delim[t@item, t@condition, toRegion])
+        passedLeftEdgeFrom <- t@x >= leftEdgeFrom
+        passedRightEdgeFrom <- t@x >= rightEdgeFrom
+        inFromRegion <- FALSE
+        regressedFromFromRegion <- FALSE
+        this.outcome <- FALSE
+        last.x <- -1
+        last.region <- -1
+        for (j in 1:length(t@x)) {
+            if (inFromRegion & passedRightEdgeFrom[j]) {
+                regressedFromFromRegion <- FALSE
+                break
+            }
+            if (inFromRegion & !passedLeftEdgeFrom[j]) {
+                regressedFromFromRegion <- TRUE
+                inFromRegion <- FALSE
+            }
+            if (t@x[j] > leftEdgeFrom & t@x[j] < rightEdgeFrom) {
+                inFromRegion <- TRUE
+            }
+            if (regressedFromFromRegion & (t@x[j] > last.x | 
+                t@x[j] < leftEdgeTo)) {
+                this.outcome <- FALSE
+                break
+            }
+            if (regressedFromFromRegion & (t@x[j] >= leftEdgeTo & 
+                t@x[j] < rightEdgeTo)) {
+                this.outcome <- TRUE
+                break
+            }
+            last.x <- t@x[j]
+        }
+        if (regressedFromFromRegion | !only.for.fp.regressions) {
+            subj <- c(subj, t@subj)
+            item <- c(item, t@item)
+            cond <- c(cond, t@condition)
+            outcomes <- c(outcomes, this.outcome)
+        }
+    }
+    result <- data.frame(subj = subj, item = item, cond = cond, 
+        outcome = outcomes)
+    return(result[do.call(order, result), ])
+  }
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ ~kwd1 }
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
