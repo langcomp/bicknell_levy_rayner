@@ -1,7 +1,7 @@
 Data and analysis for Bicknell, Levy, and Rayner paper
 ======================================================
 
-# Re-running the analysis
+## Re-running the analysis
 This repository contains all the data (in da1 format) and R analysis code used in the Bicknell, Levy, and Rayner paper. The .Rout and .Rerr files show the R output of each file, so there may be no need to re-run anything (depending on your goals).
 
 If you wish to re-run the analysis, first install all R packages that are used in the various .R files. All required packages are currently available on CRAN except:
@@ -19,7 +19,7 @@ Rscript get_saccade_data.R > get_saccade_data.Rout 2> get_saccade_data.Rerr
 
 Finally, note that the analysis fits quite a lot of big mixed-effects regression models. It is more practical to run it on a big compute server, rather than a laptop.
 
-# Analysis structure
+## Analysis structure
 
 The three experiments were "code-named" Yosemite (expt 1), YosDos (expt 2), and YosDosReplication (expt 3). This was because the experimental shift manipulation caused readers to sometimes overshoot their intended targets, and Yosemite Sam is a cartoon character who shoots too much, i.e., overshoots. Credit goes to Liz Schotter for the codename.
 
