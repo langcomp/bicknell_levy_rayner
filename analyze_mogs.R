@@ -181,6 +181,41 @@ grid.arrange(
 )
 dev.off()
 
+pdf("mogs_1a_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$loglik_1, prop_plots$loglik_1, loglik_plots$loglik_1),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
+pdf("mogs_1b_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$diff14_1, prop_plots$diff14_1, loglik_plots$diff14_1),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
+pdf("mogs_1c_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$diff25_1, prop_plots$diff25_1, loglik_plots$diff25_1),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
+pdf("mogs_1d_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$diff36_1, prop_plots$diff36_1, loglik_plots$diff36_1),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
+pdf("mogs_1e_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$diff47_1, prop_plots$diff47_1, loglik_plots$diff47_1),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
 pdf("mogs_2_SI.pdf", height = 15, width = 7.5)
 grid.arrange(
   grobs = list(
@@ -192,7 +227,41 @@ grid.arrange(
   ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
 )
 dev.off()
-
+pdf("mogs_2a_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$loglik_2, prop_plots$loglik_2, loglik_plots$loglik_2),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
+pdf("mogs_2b_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$diff14_2, prop_plots$diff14_2, loglik_plots$diff14_2),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
+pdf("mogs_2c_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$diff25_2, prop_plots$diff25_2, loglik_plots$diff25_2),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
+pdf("mogs_2d_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$diff36_2, prop_plots$diff36_2, loglik_plots$diff36_2),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
+pdf("mogs_2e_SI.pdf", height = 3, width = 7.5)
+grid.arrange(
+  grobs = list(
+    mog_plots$diff47_2, prop_plots$diff47_2, loglik_plots$diff47_2),
+  ncol = 3, widths = c(1, 1, 0.5), sub = "Landing position on target" #, main = "title", left = "RT", sub = "LOG"
+)
+dev.off()
 ## plot hypothetical data
 mog_hyp <- data_frame(target.mean = 4.5, sigma.target = 1.5, lambda.target = 0.5, skip.mean = 7, sigma.skip = 1.7, lambda.skip = 0.5)
 

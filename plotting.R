@@ -14,7 +14,10 @@ df_lmer <- readRDS("df.lmer.rds")
 
 df_plot <- df_lmer %>%
   group_by(subj, label, lpos3c, cond, expt, launch3.pre) %>%
-  summarize(gzd3c = mean(gzd3c), refix3c = mean(refix3c)) %>%
+  summarize(gzd3c = mean(gzd3c),
+            refix3c = mean(refix3c),
+            single3c = mean(single3c, na.rm = TRUE),
+            ffix3c = mean(ffix3c)) %>%
   ungroup()
 
 simplify_all_same_vector <- function(x) {
@@ -78,17 +81,33 @@ gzd_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), gzd3c, color=po
   stat_summary(fun.data="mean_cl_boot_bca_10k", position=position_dodge(width=.3), fun.args = list(conf.int=.95)) +
   facet_grid(~ panel, scale = "free_x") +
   labs(x = lpos_name, y="Gaze duration (ms)", color = population_name,
-       title = "Pair of saccade populations being compared") +
+       title = "Pair of original destinations being compared") +
   theme(plot.title = element_text(size=12))
-ggsave("gzd_nolaunch_full.pdf", gzd_nolaunch_plot, height=4, width=7)
+ggsave("gzd_nolaunch_full_ext.pdf", gzd_nolaunch_plot, height=4, width=7)
 
 refix_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), refix3c, color=population, group=population)) +
   stat_summary(fun.data="mean_cl_boot_bca_10k", fun.args = list(conf.int=.95), position=position_dodge(width=.3)) +
   facet_grid(~ panel, scale = "free_x") +
   labs(x = lpos_name, y="Refixation probability", color = population_name,
-       title = "Pair of saccade populations being compared") +
+       title = "Pair of original destinations being compared") +
   theme(plot.title = element_text(size=12))
-ggsave("refix_nolaunch_full.pdf", refix_nolaunch_plot, height=4, width=7)
+ggsave("refix_nolaunch_full_ext.pdf", refix_nolaunch_plot, height=4, width=7)
+
+sfd_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), single3c, color=population, group=population)) +
+  stat_summary(fun.data="mean_cl_boot_bca_10k", position=position_dodge(width=.3), fun.args = list(conf.int=.95)) +
+  facet_grid(~ panel, scale = "free_x") +
+  labs(x = lpos_name, y="Single fixation duration (ms)", color = population_name,
+       title = "Pair of original destinations being compared") +
+  theme(plot.title = element_text(size=12))
+ggsave("sfd_nolaunch_full_ext.pdf", sfd_nolaunch_plot, height=4, width=7)
+
+ffd_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), ffix3c, color=population, group=population)) +
+  stat_summary(fun.data="mean_cl_boot_bca_10k", position=position_dodge(width=.3), fun.args = list(conf.int=.95)) +
+  facet_grid(~ panel, scale = "free_x") +
+  labs(x = lpos_name, y="First fixation duration (ms)", color = population_name,
+       title = "Pair of original destinations being compared") +
+  theme(plot.title = element_text(size=12))
+ggsave("ffd_nolaunch_full_ext.pdf", ffd_nolaunch_plot, height=4, width=7)
 
 ## with launch site (without bca bootstrap method, since bca fails in certain cases)
 gzd_launch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), gzd3c, color=population, group=population)) +
