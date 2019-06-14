@@ -14,6 +14,17 @@ options(width = 160L)
 
 df_lmer <- readRDS("df.lmer.rds")
 
+
+full_dataset <- TRUE
+
+if (full_dataset) {
+  launch_sites <- c("launch3.pre2.1", "launch3.pre3.2", "launch3.pre4.3",
+                    "launch3.pre5.4", "launch3.pre6.5", "launch3.pre7.6",
+                    "launch3.pre8.7", "launch3.pre9.8", "launch3.pre10.9", "launch3.pre11.10")
+} else {
+  launch_sites <- "launch3.pre2.1"
+}
+
 shifts <- c(None = 0, Right = 3, Left = -3)
 df_lmer <- df_lmer %>%
   mutate(shift = shifts[cond],
@@ -72,9 +83,11 @@ add_arb_contrasts <- function(df,
   
   rownames(m) <- names(coef(lm(paste0("V1", formula), df_test)))
   colnames(m) <- do.call(paste, c(df_test[c(old_vars, other_vars_to_show)], sep="/"))
-  cat("Verify that this is the correct interpretation of variables.\nColumn headings show: ")
-  cat(paste(c(old_vars, other_vars_to_show), collapse="/"), "\n")
-  print(m)
+  if (!full_dataset) {
+      cat("Verify that this is the correct interpretation of variables.\nColumn headings show: ")
+      cat(paste(c(old_vars, other_vars_to_show), collapse="/"), "\n")
+      print(m)
+  }
   return(df)
 }
 
@@ -223,7 +236,7 @@ analyze_four_ways <- function(label, df, ints_me, ints_no_me, other_vars_to_show
               no_me = list(models = models_no_me, lrts = lrts_no_me)))
 }
 
-analyze_yd_style_no7 <- function(label, df, other_vars_to_show = c("launch3.pre2.1")) {
+analyze_yd_style_no7 <- function(label, df, other_vars_to_show = launch_sites) {
   df <- df %>%
     filter(lpos3c != 7, population != 7)
   df <- df %>%
@@ -273,7 +286,7 @@ analyze_yd_style_no7 <- function(label, df, other_vars_to_show = c("launch3.pre2
   return(analyze_four_ways(label, df, ints_me, ints_no_me, other_vars_to_show, no7 = TRUE))
 }
 
-analyze_yd_style <- function(label, df, other_vars_to_show = c("launch3.pre2.1")) {
+analyze_yd_style <- function(label, df, other_vars_to_show = launch_sites) {
   ## intermediates to specify the main effect models easily
   c4vs1 <- c(-1/2, 1/2, 0, 0, 0, 0, -1/2, 1/2, 0, 0, 0, 0, 0, 0, 0)
   c5vs2 <- c(0, 0, -1/2, 1/2, 0, 0, 0, 0, 0, -1/2, 1/2, 0, 0, 0, 0)
@@ -327,7 +340,7 @@ analyze_yd_style <- function(label, df, other_vars_to_show = c("launch3.pre2.1")
   return(analyze_four_ways(label, df, ints_me, ints_no_me, other_vars_to_show))
 }
 
-analyze_yos_style_no7 <- function(label, df, other_vars_to_show = c("launch3.pre2.1")) {
+analyze_yos_style_no7 <- function(label, df, other_vars_to_show = launch_sites) {
   df <- df %>%
     filter(lpos3c <= 3, population != 7)
   df <- df %>%
@@ -359,7 +372,7 @@ analyze_yos_style_no7 <- function(label, df, other_vars_to_show = c("launch3.pre
   return(analyze_four_ways(label, df, ints_me, ints_no_me, other_vars_to_show, no7 = TRUE))
 }
 
-analyze_yos_style <- function(label, df, other_vars_to_show = c("launch3.pre2.1")) {
+analyze_yos_style <- function(label, df, other_vars_to_show = launch_sites) {
   ## intermediates to specify the main effect models easily
   c4vs1 <- c(-1, 1, 0, 0, 0, 0, 0, 0)
   c5vs2 <- c(0, 0, -1, 1, 0, 0, 0, 0)
@@ -393,7 +406,7 @@ analyze_yos_style <- function(label, df, other_vars_to_show = c("launch3.pre2.1"
 }
 
 #' @param type either 'yos' or 'yd' style
-get_results <- function(type, label, df, other_vars_to_show = c("launch3.pre2.1")) {
+get_results <- function(type, label, df, other_vars_to_show = launch_sites) {
   results <- list()
   
   if (type == 'yd') {

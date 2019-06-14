@@ -104,7 +104,8 @@ df.lmer <- df.lmer %>%
 df.lmer <- df.lmer %>%
   mutate(gzd3c = as.integer(gzd3 - gzd3.sb),
          nfix3c = nfix3 - nfix3.sb,
-         single3c = ifelse(nfix3c == 1, ffix3.pre, NA), # only correct for the data we analyze
+         single3c = ifelse(nfix3c == 1, gzd3c, NA),
+         ffix3c = ifelse(nfix3c == 0, NA, ffix3.pre), # only true for the data we analyze
          skip3c = (nfix3c == 0),
          skip2.pre = (nfix2.pre == 0),
          skip3.pre = (nfix3.pre == 0),
@@ -113,7 +114,10 @@ df.lmer <- df.lmer %>%
          refix3c = (nfix3c > 1),
          lpos3c = ifelse(cond == "None", lpos3.pre, NA),
          lpos3c = ifelse(cond == "Right", lpos3.pre - 3, lpos3c),
-         lpos3c = ifelse(cond == "Left", lpos3.pre + 3, lpos3c))
+         lpos3c = ifelse(cond == "Left", lpos3.pre + 3, lpos3c),
+         single2.pre = ifelse(skip2.pre | single2.pre == 0, NA, single2.pre),
+         ffix2.pre = ifelse(skip2.pre | ffix2.pre == 0, NA, ffix2.pre),
+         gzd2.pre = ifelse(skip2.pre | gzd2.pre == 0, NA, gzd2.pre))
 
 stopifnot(with(df.lmer %>% filter(cond != "Left"),
                identical(gzd3c, gzd3) &
@@ -130,7 +134,7 @@ df.lmer <- df.lmer %>%
 df.lmer <- df.lmer %>%
   select(subj, item, cond, expt,
          ffix2.pre, single2.pre, gzd2.pre, ro2.pre, nfix2.pre, lpos2.pre, launch2.pre, launch3.pre,
-         gzd3c, nfix3c, single3c, skip3c, skip2.pre, skip3.pre, refix3c, lpos3.pre, lpos3c,
+         gzd3c, nfix3c, single3c, ffix3c, skip3c, skip2.pre, skip3.pre, refix3c, lpos3.pre, lpos3c,
          nfix3.sb, lpos3) # keep these two just for a sanity check later
 
 df.lmer <- df.lmer %>%
@@ -139,30 +143,31 @@ df.lmer <- df.lmer %>%
   filter(to_kick == F) %>%
   select(-c(to_kick)) %>%
   
-  ## our exclusion criteria
+  ## we're only analyzing cases where target is fixated both pre- and post-shift
+  filter(!skip3c) %>%
   filter(skip3.pre == F) %>% # would have skipped target
+  filter(launch3.pre != -1) %>% # b/c we exclude skips, these are problems (e.g., short fixations)
   filter(lpos3.pre != -1) %>% # would-be skips according to lpos
   mutate(throwoff = (((cond == "Right") & (lpos3.pre < 4)) | ((cond == "Left") & (lpos3.pre > 4)))) %>%
   filter(throwoff == F) %>%
   filter(lpos3.pre != 0) %>% # display change triggered without landing on word
-  filter(skip2.pre == F) %>%
-  filter(ro2.pre == 0) %>%
-  filter(lpos2.pre != 0) %>%
   
   ## get rid of problematic cases
-  filter(launch3.pre != -1) %>% # b/c we exclude skips, these are problems (e.g., short fixations)
-  filter(launch2.pre != -1) %>% # ditto
-  filter((launch3.pre + lpos2.pre) %in% c(4,5)) %>% # must be impossible; not many
-  filter(launch3.pre <= 5) %>% # should be impossible b/c we require that pretarget word was fixated and not regressed from
-  left_join(df_exclusions, by=c("expt", "subj", "item")) %>%
+  left_join(df_exclusions, by=c("expt", "subj", "item"))
+
+nrow(df.lmer %>% filter(!good)) / nrow(df.lmer)
+
+df.lmer <- df.lmer %>%
   filter(good == T) # exclude blinks, long fixations, and display change problems
 
 ## sanity checks
 stopifnot(with(df.lmer,
-               (min(gzd2.pre) >= 80) &
-                 (min(ffix2.pre) >= 80) &
-                 (min(gzd3c) >= 80) &
-                 (all(skip3c==F))))
+               (min(gzd2.pre, na.rm = TRUE) >= 80) &
+                 (min(single3c, na.rm = TRUE) >= 80) &
+                 (min(ffix2.pre, na.rm = TRUE) >= 80) &
+                 (min(single2.pre, na.rm = TRUE) >= 80) &
+                 (min(gzd3c) >= 80)
+               ))
 stopifnot(with(df.lmer,
                (cond=="None" & lpos3c == lpos3) |
                  (cond=="Right" & lpos3c == lpos3) |
@@ -183,9 +188,13 @@ df.lmer <- df.lmer %>%
   mutate(gzd3c = remove.outliers(gzd3c),
          single3c = remove.outliers(single3c),
          ffix2.pre = remove.outliers(ffix2.pre),
+         ffix3c = remove.outliers(ffix3c),
          single2.pre = remove.outliers(single2.pre),
          gzd2.pre = remove.outliers(gzd2.pre)) %>%
   ungroup()
+
+# how many gzd3c datapoints were excluded?
+sum(is.na(df.lmer$gzd3c)) / nrow(df.lmer)
 
 # add pretarget length
 df.lmer <- df.lmer %>%
@@ -193,15 +202,28 @@ df.lmer <- df.lmer %>%
   mutate(front.half.pretarget = ifelse(pretarget.length == 3, lpos2.pre > 1, NA),
          front.half.pretarget = ifelse(pretarget.length == 4, lpos2.pre > 2, front.half.pretarget))
 
+# exclude very far launch sites with little data (this only affects the full dataset analysis. the subset already restricts launch site tightly)
+old_size <- nrow(df.lmer)
+
+table(df.lmer$launch3.pre) # exclude launch sites with fewer than 20 instances -> keeping 1-11
+df.lmer <- df.lmer %>%
+  filter(launch3.pre > 0, # this is a single case
+         launch3.pre < 12)
+1-nrow(df.lmer)/old_size # excluding 0.8%
+
 # (optionally) analyze tight dataset to rule out mislocated refixations, etc.
 # change full_dataset to TRUE this out to generate analyses / figures for the full dataset without these restrictions
-full_dataset <- FALSE
+full_dataset <- TRUE
 if (!full_dataset) {
   cat("Dataset size before excluding multiple fixations of pretarget and fixations on back half of pretarget: ")
   cat(nrow(df.lmer), "\n")
   df.lmer <- df.lmer %>%
-    filter(nfix2.pre == 1,
-           front.half.pretarget == T)
+    filter(!skip2.pre,
+           launch2.pre != -1, # b/c we exclude skips, these are problems (e.g., short fixations)
+           ro2.pre == 0,
+           nfix2.pre == 1,
+           front.half.pretarget)
+
   cat("Dataset size after those exclusions: ")
   cat(nrow(df.lmer), '\n')
 }
