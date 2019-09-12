@@ -54,11 +54,6 @@ subj_excl <- df_exclusions %>%
     extra =  grepl("-", label),
     to_kick = kick_dc | kick_blink | extra)
 
-subj_excl %>%
-  filter(to_kick, !extra) %>%
-  arrange(kick_dc, kick_blink) %>%
-  as.data.frame()
-
 subj_excl <- subj_excl %>%
   select(subj, expt, to_kick)
 
