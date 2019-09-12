@@ -25,6 +25,13 @@ The following objects are masked from ‘package:base’:
 
 Loading required package: ggintervals
 Warning message:
-Removed 70 rows containing non-finite values (stat_summary). 
+Removed 154 rows containing non-finite values (stat_summary). 
 Warning message:
-Removed 70 rows containing non-finite values (stat_summary). 
+Removed 965 rows containing non-finite values (stat_summary). 
+Warning message:
+Removed 169 rows containing non-finite values (stat_summary). 
+Warning messages:
+1: Removed 154 rows containing non-finite values (stat_summary). 
+2: Removed 16 rows containing missing values (geom_pointrange). 
+Warning message:
+Removed 14 rows containing missing values (geom_pointrange). 

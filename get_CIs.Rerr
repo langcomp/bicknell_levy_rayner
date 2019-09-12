@@ -46,6 +46,6 @@ The following object is masked from ‘package:tidyr’:
 
 Loading required package: methods
 Warning message:
-Removed 6 rows containing missing values (geom_pointrange). 
+Removed 7 rows containing missing values (geom_pointrange). 
 Warning message:
-Removed 6 rows containing missing values (geom_pointrange). 
+Removed 7 rows containing missing values (geom_pointrange). 

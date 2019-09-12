@@ -83,9 +83,11 @@ add_arb_contrasts <- function(df,
   
   rownames(m) <- names(coef(lm(paste0("V1", formula), df_test)))
   colnames(m) <- do.call(paste, c(df_test[c(old_vars, other_vars_to_show)], sep="/"))
-  cat("Verify that this is the correct interpretation of variables.\nColumn headings show: ")
-  cat(paste(c(old_vars, other_vars_to_show), collapse="/"), "\n")
-  print(m)
+  if (!full_dataset) {
+      cat("Verify that this is the correct interpretation of variables.\nColumn headings show: ")
+      cat(paste(c(old_vars, other_vars_to_show), collapse="/"), "\n")
+      print(m)
+  }
   return(df)
 }
 

@@ -25,4 +25,4 @@ The three experiments were "code-named" Yosemite (expt 1), YosDos (expt 2), and 
 
 The data for each experiment is in its own subdirectory, named after the experiment's codename.
 
-One final note is that there are two overall analyses reported in the paper: the primary one in the main text and a variant of that analysis making far fewer data exclusions reported in supplementary material. The results in this git repository are for the primary analysis. If you wish to re-run the analysis on the "full" dataset (making fewer exclusions), you need to change `full_dataset <- FALSE` to `full_dataset <- TRUE` in get_data.R.
+One final note is that there are two overall analyses reported in the paper: the primary analysis reported first in the Results section and a subset analysis reported later in that section. The results in this git repository are for the primary analysis. If you wish to re-run the subset analysis, you need to change `full_dataset <- TRUE` to `full_dataset <- FALSE` in both `get_data.R` and `get_stats.R`.
