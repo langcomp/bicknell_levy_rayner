@@ -2,6 +2,7 @@ library(Hmisc)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(ggthemes)
 library(grid)
 library(gridExtra)
 library(stringr)
@@ -67,12 +68,9 @@ df_second_fitting <- bind_rows(df_second_fitting_1, df_second_fitting_2) %>%
 
 print(max_mogs)
 
-# my_colors <- scales::brewer_pal(type = "qual", pal = "Dark2")(8)
-my_colors <- scales::hue_pal(h = c(0, 360) + 15, c = 100, l = 65, h.start = 0, 
-                direction = 1)(4)
-scales::show_col(my_colors)
-tot_color <- my_colors[4]
-skip_color <- my_colors[1]
+my_colors <- colorblind_pal()(3)
+tot_color <- my_colors[1]
+skip_color <- my_colors[2]
 targ_color <- my_colors[3]
 
 ## plot mixture-of-gaussians
@@ -100,7 +98,8 @@ plot_mog <- function(mog) {
     scale_x_continuous(breaks = seq(-2, 12),
                        labels = labels) +
     labs(x = "Original destination",
-         y = "Probability density")
+         y = "Probability density") +
+    scale_color_colorblind()
 #           panel.background = element_blank(),
 #           panel.grid.major = element_blank(),
 #           panel.grid.minor = element_blank())
@@ -124,13 +123,15 @@ plot_props <- function(mog) {
     mutate(lpos = as.numeric(str_sub(lpos, -1, -1))) %>%
     mutate(population = "skip")
 
-  p <- ggplot(mogs, aes(lpos, prop_skip, fill = skip_color)) + geom_bar(stat = "identity") +
+  p <- ggplot(mogs, aes(lpos, prop_skip, fill = factor(1))) + geom_bar(stat = "identity") +
     coord_cartesian(ylim = c(0, 1)) +
     scale_x_continuous(breaks = seq(7), 
                        labels = labels) +
     labs(x = "Original destination",
          y = "Proportion intended-skip") +
-    theme(legend.position = "none")
+    scale_fill_manual(values = skip_color) +
+    theme(legend.position = "none") +
+    scale_color_colorblind()
   return(p)
 }
 
@@ -148,7 +149,8 @@ plot_loglik <- function(mog) {
     theme(axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
           axis.title.x = element_blank()) +
-    labs(y = "Log-likelihood")
+    labs(y = "Log-likelihood") +
+    scale_color_colorblind()
 }
 
 loglik_plots <- lapply(max_mogs_as_list, plot_loglik)
@@ -306,7 +308,8 @@ mog_plot_hyp <- ggplot(dat, aes(x)) +
   scale_x_continuous(breaks = seq(-2, 12),
                      labels = labels) +
   labs(x = "Original destination",
-       y = "Probability density")
+       y = "Probability density") +
+    scale_color_colorblind()
 
 pdf("mogs_hyp.pdf", height = 28/9, width = 7)
 grid.arrange(

@@ -1,5 +1,6 @@
 ## PLOTTING
 library(ggplot2)
+library(ggthemes)
 library(Hmisc)
 library(dplyr)
 library(tidyr)
@@ -82,7 +83,8 @@ gzd_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), gzd3c, color=po
   facet_grid(~ panel, scale = "free_x") +
   labs(x = lpos_name, y="Gaze duration (ms)", color = population_name,
        title = "Pair of original destinations being compared") +
-  theme(plot.title = element_text(size=12))
+    theme(plot.title = element_text(size=12)) +
+    scale_color_colorblind()
 ggsave("gzd_nolaunch_full_ext.pdf", gzd_nolaunch_plot, height=4, width=7)
 
 refix_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), refix3c, color=population, group=population)) +
@@ -90,7 +92,8 @@ refix_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), refix3c, colo
   facet_grid(~ panel, scale = "free_x") +
   labs(x = lpos_name, y="Refixation probability", color = population_name,
        title = "Pair of original destinations being compared") +
-  theme(plot.title = element_text(size=12))
+  theme(plot.title = element_text(size=12)) +
+    scale_color_colorblind()
 ggsave("refix_nolaunch_full_ext.pdf", refix_nolaunch_plot, height=4, width=7)
 
 sfd_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), single3c, color=population, group=population)) +
@@ -98,7 +101,8 @@ sfd_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), single3c, color
   facet_grid(~ panel, scale = "free_x") +
   labs(x = lpos_name, y="Single fixation duration (ms)", color = population_name,
        title = "Pair of original destinations being compared") +
-  theme(plot.title = element_text(size=12))
+  theme(plot.title = element_text(size=12)) +
+    scale_color_colorblind()
 ggsave("sfd_nolaunch_full_ext.pdf", sfd_nolaunch_plot, height=4, width=7)
 
 ffd_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), ffix3c, color=population, group=population)) +
@@ -106,20 +110,23 @@ ffd_nolaunch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), ffix3c, color=p
   facet_grid(~ panel, scale = "free_x") +
   labs(x = lpos_name, y="First fixation duration (ms)", color = population_name,
        title = "Pair of original destinations being compared") +
-  theme(plot.title = element_text(size=12))
+  theme(plot.title = element_text(size=12)) +
+    scale_color_colorblind()
 ggsave("ffd_nolaunch_full_ext.pdf", ffd_nolaunch_plot, height=4, width=7)
 
 ## with launch site (without bca bootstrap method, since bca fails in certain cases)
 gzd_launch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), gzd3c, color=population, group=population)) +
   stat_summary(fun.data="mean_cl_boot",  fun.args = list(conf.int=.95), position=position_dodge(width=.3)) +
   facet_grid(launch3.pre ~ panel, scale = "free_x") +
-  labs(x = lpos_name, y="Gaze duration (ms)", color = population_name)
+  labs(x = lpos_name, y="Gaze duration (ms)", color = population_name) +
+    scale_color_colorblind()
 ggsave("gzd_launch_full.pdf", gzd_launch_plot, height=6, width=7)
 
 refix_launch_plot <- ggplot(df_fancyplot, aes(as.factor(lpos3c), refix3c, color=population, group=population)) +
   stat_summary(fun.data="mean_cl_boot",  fun.args = list(conf.int=.95), position=position_dodge(width=.3)) +
   facet_grid(launch3.pre ~ panel, scale = "free_x") +
-  labs(x = lpos_name, y="Refixation probability", color = population_name)
+  labs(x = lpos_name, y="Refixation probability", color = population_name) +
+    scale_color_colorblind()
 ggsave("refix_launch_full.pdf", refix_launch_plot, height=6, width=7)
 
 
