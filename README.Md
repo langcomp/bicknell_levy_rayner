@@ -1,5 +1,8 @@
-Data and analysis for Bicknell, Levy, and Rayner paper
+Data, analysis, and materials for Bicknell, Levy, and Rayner paper
 ======================================================
+
+## Materials
+The 160 sentences used in the experiments are contained in materials.txt.
 
 ## Re-running the analysis
 This repository contains all the data (in da1 format) and R analysis code used in the Bicknell, Levy, and Rayner paper. The .Rout and .Rerr files show the R output of each file, so there may be no need to re-run anything (depending on your goals).
